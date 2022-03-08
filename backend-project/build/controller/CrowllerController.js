@@ -26,7 +26,7 @@ var checkLogin = function (req, res, next) {
         next();
     }
     else {
-        res.json((0, util_1.getResponseData)(null, '请先登录'));
+        res.json((0, util_1.getResponseData)(false, '请先登录'));
     }
 };
 var CrowllerController = /** @class */ (function () {
@@ -37,7 +37,7 @@ var CrowllerController = /** @class */ (function () {
         var url = "http://www.dell-lee.com/typescript/demo.html?secret=".concat(secret);
         var analyzer = analyzer_1.default.getInstance();
         new crowller_1.default(url, analyzer);
-        res.json((0, util_1.getResponseData)(null));
+        res.json((0, util_1.getResponseData)(true));
     };
     CrowllerController.prototype.showData = function (req, res) {
         try {
@@ -46,7 +46,7 @@ var CrowllerController = /** @class */ (function () {
             res.json((0, util_1.getResponseData)(JSON.parse(result)));
         }
         catch (e) {
-            res.json((0, util_1.getResponseData)(null, '数据不存在'));
+            res.json((0, util_1.getResponseData)(false, '数据不存在'));
         }
     };
     __decorate([
@@ -64,7 +64,7 @@ var CrowllerController = /** @class */ (function () {
         __metadata("design:returntype", void 0)
     ], CrowllerController.prototype, "showData", null);
     CrowllerController = __decorate([
-        (0, decorator_1.controller)('/')
+        (0, decorator_1.controller)('/api')
     ], CrowllerController);
     return CrowllerController;
 }());

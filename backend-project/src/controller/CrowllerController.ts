@@ -7,16 +7,25 @@ import { getResponseData } from '../utils/util';
 import Crowller from '../utils/crowller';
 import Analyzer from '../utils/analyzer';
 
+interface CourseItem {
+  title: string;
+  count: number;
+}
+
+interface DataStructure {
+  [key: string]: CourseItem[];
+}
+
 const checkLogin = (req: Request, res: Response, next: NextFunction): void => {
   const isLogin = !!(req.session ? req.session.login : false);
   if (isLogin) {
     next();
   } else {
-    res.json(getResponseData(null, '请先登录'));
+    res.json(getResponseData<boolean>(false, '请先登录'));
   }
 };
 
-@controller('/')
+@controller('/api')
 export class CrowllerController {
   @get('/getData')
   @use(checkLogin)
@@ -25,7 +34,7 @@ export class CrowllerController {
     const url = `http://www.dell-lee.com/typescript/demo.html?secret=${secret}`;
     const analyzer = Analyzer.getInstance();
     new Crowller(url, analyzer);
-    res.json(getResponseData(null));
+    res.json(getResponseData<boolean>(true));
   }
 
   @get('/showData')
@@ -34,9 +43,9 @@ export class CrowllerController {
     try {
       const position = path.resolve(__dirname, '../../data/course.json');
       const result = fs.readFileSync(position, 'utf8');
-      res.json(getResponseData(JSON.parse(result)));
+      res.json(getResponseData<DataStructure>(JSON.parse(result)));
     } catch (e) {
-      res.json(getResponseData(null, '数据不存在'));
+      res.json(getResponseData<boolean>(false, '数据不存在'));
     }
   }
 }
