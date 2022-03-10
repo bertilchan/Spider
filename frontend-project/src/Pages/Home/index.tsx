@@ -6,19 +6,10 @@ import request from '../../request';
 import moment from 'moment';
 import './style.css';
 
-interface CourseItem {
-  title: string;
-  count: number;
-}
-
-interface DataStructure {
-  [key: string]: CourseItem[];
-}
-
 interface State {
   loaded: boolean;
   isLogin: boolean;
-  data: DataStructure;
+  data: resopnseResult.DataStructure;
 }
 
 class Home extends Component {
@@ -53,7 +44,7 @@ class Home extends Component {
 
   handleLogoutClick = () => {
     request.get('/api/logout').then(res => {
-      const data: DataStructure = res.data;
+      const data: resopnseResult.logout = res.data;
       if (data) {
         this.setState({
           isLogin: false
@@ -66,7 +57,7 @@ class Home extends Component {
 
   handleCrowllerClick = () => {
     request.get('/api/getData').then(res => {
-      const data: boolean = res.data;
+      const data: resopnseResult.getData = res.data;
       if (data) {
         message.success('爬取成功');
       } else {

@@ -36,7 +36,7 @@ class LoginForm extends Component<Props> {
             }
           )
           .then(res => {
-            const data: boolean = res.data;
+            const data: resopnseResult.login = res.data;
             if (data) {
               this.setState({
                 isLogin: true
