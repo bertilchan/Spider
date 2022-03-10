@@ -10,3 +10,7 @@
 * 初始化：`npm install`
 * 运行：`npm run dev`
 
+### 效果展示
+
+![image.jpg](.\frontend-project\public\image.jpg) 
+
