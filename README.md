@@ -12,5 +12,5 @@
 
 ### 效果展示
 
-![image.jpg](.\frontend-project\public\image.jpg) 
+![image.jpg](https://github.com/bertilchan/Spider/blob/master/frontend-project/public/image.jpg) 
 
